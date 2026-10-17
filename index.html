@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, My Diva ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Georgia, serif;
+  text-align: center;
+  color: #a51d59;
+  background: linear-gradient(135deg, #ffe6f0, #ffc1d8, #fff0f6);
+}
+
+.screen {
+  min-height: 100vh;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hidden {
+  display: none !important;
+}
+
+h1 {
+  font-size: clamp(32px, 8vw, 48px);
+}
+
+p {
+  line-height: 1.8;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#balloonButton {
+  position: relative;
+  width: 210px;
+  height: 245px;
+  border: none;
+  background: transparent;
+  margin: 15px;
+  animation: float 2s ease-in-out infinite;
+}
+
+.balloon {
+  position: absolute;
+  top: 35px;
+  left: 45px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #ff9fbd, #ff176a);
+  transform: rotate(-45deg);
+  border-radius: 15px 0 15px 0;
+  filter: drop-shadow(0 10px 15px #ff4f8b55);
+}
+
+.balloon::before,
+.balloon::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.balloon::before {
+  top: -60px;
+  left: 0;
+}
+
+.balloon::after {
+  left: 60px;
+  top: 0;
+}
+
+.balloonShine {
+  position: absolute;
+  top: 28px;
+  left: 53px;
+  z-index: 2;
+  width: 15px;
+  height: 48px;
+  background: #ffffff99;
+  border-radius: 50%;
+  transform: rotate(25deg);
+}
+
+.string {
+  position: absolute;
+  top: 165px;
+  left: 104px;
+  height: 65px;
+  border-left: 2px solid #bb5680;
+}
+
+@keyframes float {
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+.fallingHeart {
+  position: fixed;
+  top: -30px;
+  z-index: 1;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+#birthdayMessage h1 {
+  color: #d41461;
+  text-shadow: 0 3px 10px #ffffff;
+  animation: popIn .7s ease-out;
+}
+
+@keyframes popIn {
+  from { transform: scale(.3); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.confetti {
+  position: fixed;
+  top: -20px;
+  z-index: 5;
+  pointer-events: none;
+  animation: confettiFall 3.5s linear forwards;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+#letterScreen {
+  justify-content: flex-start;
+  padding-top: 5vh;
+}
+
+.letter {
+  width: min(600px, 95%);
+  text-align: left;
+  background: #fff4d9;
+  color: #694235;
+  border: 2px solid #d8b77f;
+  box-shadow: 0 12px 35px #9f285133;
+  padding: 28px 24px;
+  transform-origin: top center;
+  animation: unroll 2s ease-out both;
+}
+
+@keyframes unroll {
+  from {
+    opacity: 0;
+    transform: perspective(800px) rotateX(-80deg) scaleY(.05);
+    clip-path: inset(0 0 90% 0);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(800px) rotateX(0) scaleY(1);
+    clip-path: inset(0);
+  }
+}
+
+.letter h2 {
+  color: #a51d59;
+  line-height: 1.4;
+}
+
+.letter p {
+  font-size: 16px;
+  white-space: normal;
+  line-height: 1.9;
+}
+
+#replay {
+  margin: 22px;
+  border: none;
+  border-radius: 30px;
+  padding: 13px 23px;
+  color: white;
+  background: #d41461;
+  font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1: HEART BALLOON -->
+<section class="screen" id="intro">
+  <p>✨ A little surprise made with love ✨</p>
+  <h1>For My Birthday Diva 💗</h1>
+  <p>Tap the heart balloon, my princess 🥹🎀</p>
+
+  <button id="balloonButton" aria-label="Pop the heart balloon">
+    <span class="balloon"></span>
+    <span class="balloonShine"></span>
+    <span class="string"></span>
+  </button>
+
+  <p>♡ TAP THE HEART ♡</p>
+</section>
+
+<!-- SCREEN 2: BIRTHDAY CELEBRATION -->
+<section class="screen hidden" id="birthdayMessage">
+  <div style="font-size:50px">🎉🎊💖🎊🎉</div>
+  <h1>Happy Birthday<br>Diva, My Love! 💗</h1>
+  <h2>I LOVE YOU THE MOST 🥹❤️</h2>
+  <p>🎀 You deserve the whole world, baby! 💋</p>
+</section>
+
+<!-- SCREEN 3: THE LOVE LETTER -->
+<section class="screen hidden" id="letterScreen">
+  <p>💌 A little letter from my heart 💌</p>
+
+  <article class="letter">
+    <h2>Happy birthday, my baby, my princess, my everything ❤️🥹🎂</h2>
+
+    <p>
+      I know sometimes I make you feel like I don't care or love you enough,
+      and I'm sorry for that, my love. Please never think you're not my type
+      because you're exactly the girl I want. You mean so much to me, and I
+      never want you to doubt your place in my heart. I know I might not
+      always show my love the way you deserve, but I promise I want to do
+      better and make you feel loved, appreciated, and wanted every day.
+      You deserve all the happiness in this world, baby, and I pray God
+      blesses you with everything your heart desires. I love you so much,
+      my beautiful girl, and I'm so lucky to have you in my life. Happy
+      birthday once again, my love ❤️🎀💋🫂
+    </p>
+
+    <h3 style="text-align:right;color:#c12766">
+      Forever yours, my love 💋❤️
+    </h3>
+  </article>
+
+  <button id="replay">Replay your surprise 💖</button>
+</section>
+
+<script>
+const intro = document.getElementById("intro");
+const birthday = document.getElementById("birthdayMessage");
+const letter = document.getElementById("letterScreen");
+const confettiColors = [
+  "#ff176a", "#ffb703", "#a78bfa",
+  "#5eead4", "#ff8c69", "#ffffff"
+];
+
+let transitionTimer;
+
+// Make falling hearts
+for (let i = 0; i < 35; i++) {
+  const heart = document.createElement("span");
+
+  heart.className = "fallingHeart";
+  heart.textContent = ["💗", "💕", "♥", "💖", "♡"][
+    Math.floor(Math.random() * 5)
+  ];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (14 + Math.random() * 20) + "px";
+  heart.style.animationDuration = (6 + Math.random() * 9) + "s";
+  heart.style.animationDelay = (-Math.random() * 12) + "s";
+
+  document.body.appendChild(heart);
+}
+
+// Birthday confetti explosion
+function launchConfetti() {
+  for (let i = 0; i < 140; i++) {
+    const piece = document.createElement("span");
+
+    piece.className = "confetti";
+    piece.textContent = Math.random() > 0.65 ? "💖" : "";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.width = (5 + Math.random() * 9) + "px";
+    piece.style.height = (8 + Math.random() * 14) + "px";
+    piece.style.background =
+      confettiColors[Math.floor(Math.random() * confettiColors.length)];
+    piece.style.animationDelay = Math.random() * 1.2 + "s";
+    piece.style.fontSize = "22px";
+
+    document.body.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 5500);
+  }
+}
+
+// Balloon tap
+document.getElementById("balloonButton").addEventListener("click", () => {
+  clearTimeout(transitionTimer);
+
+  intro.classList.add("hidden");
+  letter.classList.add("hidden");
+  birthday.classList.remove("hidden");
+
+  launchConfetti();
+
+  // Show birthday greeting for 10 seconds, then reveal letter
+  transitionTimer = setTimeout(() => {
+    birthday.classList.add("hidden");
+    letter.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, 10000);
+});
+
+// Replay from the beginning
+document.getElementById("replay").addEventListener("click", () => {
+  clearTimeout(transitionTimer);
+  letter.classList.add("hidden");
+  birthday.classList.add("hidden");
+  intro.classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+
+</body>
+</html>
+How to turn it into a
